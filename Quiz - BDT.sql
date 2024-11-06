@@ -84,137 +84,118 @@ CREATE TABLE logTester(
 	waktu TIMESTAMP DEFAULT(NOW())
 );
 
-/**
- * Soal
-
-1. Buat Query Untuk menampilkan kolom devNama, devCeo, dan devAlamat pada tabel developer ?
-2.
-Buat Query untuk menampilkan devNama, dan devAlamat pada tabel developer yang beralamat di 'California' ?
-3.
-Buat Query Untuk menampilkan semua data di tabel developer untuk developer bernama 'Square Enix' ?
-4. Buat Quary untuk menampilkan semua data di tabel game untuk tipe genre 'First Person Shooter' ?
-5. Buat Query untuk menampilkan semua data di tabel game untuk idDeveloper D01 dan DO5 ?
-6. Buat Query yang menampilkan gameName dan Genre di tabel game urutkan sesuai alfabet dari gameNama dan
-Genre ?
-7. Buat Query Untuk menampilkan gameName dan Genre di tabel game untuk genre game 'Action RPG' dan 'Action
-Adventure'
-8.
-Buat Query untuk menghitung jumlah game bergenre 'First Person Shooter' ?
-9.
-Buat Query untuk menampilkan gameName, devNama, genre, devCeo dari tabel developer dan game ?
-10. Buat Query untuk menampilkan namaTester, gameName, Usia dan RateGame dari tabel game dan tester ?
-11. Buat Query untuk menghitung nilai rata2 dari tabel tester untuk rata2 RateGame ?
-12. Buat Query untuk menampilkan semua data di tabel tester untuk usia yang berumur antara 15 sampai 18 (15 dan
-18 ikut terbawa)
-13. Buat Query untuk menampilkan gameName, namaTester, RateGame dari tabel game dan tester yang
-rategamenya diantara nilai 80 sampai 90 (80 dan 90 dibawa) ?
-14.
-15.
-Buat Query untuk menghitung jumlah tester yang memberi rate antara 85-90 (85 dan 90 ikut terbawa) ?
-Buat Query untuk menampilkan gameName, namaTester, genre dan rate game dari tabel game dan tester yang
-bermain genre Action RPG ?
-16.
-Buat view untuk melihat kolom gameName, devNama, namaTester, RateGame dari tabel developer, game dan
-tester beri nama view tersebut 'vRateGame'?
-a. Buat view vRateGame
-b. Query memanggil view tersebut
-17. Buat Store Procedure untuk input data pada tabel Tester dan beri nama SP tersebut 'INPUTTESTER?
-a. Buat SP 'INPUTTESTER'
-b. Panggil SP 'INPUTTESTER inputkan (idGame =7, namaTester 'Hilda'
-, usia = 21, Rate 80)
-18. Buat Store Procedure untuk Edit data pada tabel Tester dan beri nama SP tersebut 'EDITTESTER?
-a. Buat SP 'EDITTESTER dengan 2 parameter (nama tester yang akan diganti dan hasil yg diganti)
-b. Panggil SP 'EDITTESTER ubah nama Hilda yang tadi iinputkan menjadi Hildawati
-19. Buat Store Procedure untuk Delete data pada tabel Tester dan beri nama SP tersebut 'DELETETESTER?
-a. Buat SP 'DELETETESTER (1 parameter nama tester yang ingin dihapus)
-b. Panggil SP 'DELETETESTER untuk menghapus data tester yang bernama Hildawati
-20. Buat Triger untuk setiap aktivitas Create,Update dan Delete pada tabel tester dan masukan kedalam logtester dan
-berinama
-a. Buat Trigger dengan nama TrackTesterInput untuk setiap data tester yang diinput, jenis berinama 'Tambah
-Data'
-b. Buat Trigger dengan nama TrackTesterEdit untuk setiap data tester yang diedit, jenis berinama 'Edit Data'
-c. Buat Trigger dengan nama TrackTesterDelete untuk setiap data tester yang didelete ,jenis berinama 'Delete
-Data'
-
+/* 
+ * 1. Buat Query Untuk menampilkan kolom devNama, devCeo, dan devAlamat pada tabel developer ?
  */
-
-
-/* Nomor 1 */
 
 SELECT devNama, devCeo, devAlamat FROM developer;
 
-/* Nomor 2 */
+/*
+ * 2. Buat Query untuk menampilkan devNama, dan devAlamat pada tabel developer yang beralamat di 'California' ? 
+ */
 
 SELECT devNama, devAlamat FROM developer 
 WHERE devAlamat LIKE '%California%';
 
-/* Nomor 3 */
+/*
+ * 3. Buat Query Untuk menampilkan semua data di tabel developer untuk developer bernama 'Square Enix' ?
+ */
 
 SELECT * FROM developer 
 WHERE devNama = 'Square Enix';
 
-/* Nomor 4 */
+/* 
+ * 4. Buat Quary untuk menampilkan semua data di tabel game untuk tipe genre 'First Person Shooter' ?
+ */
 
 SELECT * FROM game 
 WHERE genre = 'First Person Shooter';
 
-/* Nomor 5 */
+/* 
+ * 5. Buat Query untuk menampilkan semua data di tabel game untuk idDeveloper D01 dan DO5 ?
+ */
 
 SELECT * FROM game 
 WHERE idDeveloper IN ('D01', 'D05');
 
-/* Nomor 6 */
+/* 
+ * 6. Buat Query yang menampilkan gameName dan Genre di tabel game urutkan sesuai alfabet dari gameNama dan Genre ?
+ */
 
 SELECT gameName, genre FROM game 
 ORDER BY gameName, genre;
 
-/* Nomor 7 */
+/* 
+ * 7. Buat Query Untuk menampilkan gameName dan Genre di tabel game untuk genre game 'Action RPG' dan 'Action Adventure'
+ */
 
 SELECT gameName, genre FROM game 
 WHERE genre IN ('Action RPG', 'Action Adventure');
 
-/* Nomor 8 */
+/* 
+ * 8. Buat Query untuk menghitung jumlah game bergenre 'First Person Shooter' ?
+ */
 
 SELECT COUNT(*) FROM game 
 WHERE genre = 'First Person Shooter';
 
-/* Nomor 9 */
+/* 
+ * 9. Buat Query untuk menampilkan gameName, devNama, genre, devCeo dari tabel developer dan game ?
+ */
 
 SELECT gameName, devNama, genre, devCeo FROM developer
 JOIN game ON developer.idDeveloper = game.idDeveloper;
 
 
-/* Nomor 10 */
+/* 
+ * 10. Buat Query untuk menampilkan namaTester, gameName, Usia dan RateGame dari tabel game dan tester ?
+ */
 
 SELECT gameName, namaTester, genre, rateGame FROM game 
 JOIN tester ON game.idGame = tester.idGame;
 
-/* Nomor 11 */
+/* 
+ * 11. Buat Query untuk menghitung nilai rata2 dari tabel tester untuk rata2 RateGame ?
+ */
 
 SELECT AVG(rateGame) FROM tester;
 
-/* Nomor 12 */
+/* 
+ * 12. Buat Query untuk menampilkan semua data di tabel tester untuk usia yang berumur antara 15 sampai 18 (15 dan 18 ikut terbawa)
+ */
 
 SELECT * FROM tester WHERE usia BETWEEN 15 AND 18;
 
-/* Nomor 13 */
+/* 
+ * 13. Buat Query untuk menampilkan gameName, namaTester, RateGame dari tabel game dan tester yang 
+ * rategamenya diantara nilai 80 sampai 90 (80 dan 90 dibawa) ?
+ */
 
 SELECT gameName, namaTester, rateGame FROM game
 JOIN tester ON game.idGame = tester.idGame
 WHERE rateGame BETWEEN 80 AND 90;
 
-/* Nomor 14 */
+/* 
+ * 14. Buat Query untuk menghitung jumlah tester yang memberi rate antara 85-90 (85 dan 90 ikut terbawa) ?
+ */
 
 SELECT COUNT(*) FROM tester
 WHERE rateGame BETWEEN 85 AND 90;
 
-/* Nomor 15 */
+/* 
+ * 15. Buat Query untuk menampilkan gameName, namaTester, genre dan rate game dari tabel game dan tester yang bermain genre Action RPG ?
+ */
 
 SELECT gameName, namaTester, genre, rateGame FROM game
 JOIN tester ON game.idGame = tester.idGame 
 WHERE genre = 'Action RPG';
 
-/* Nomor 16 */
+/* 
+ * 16. Buat view untuk melihat kolom gameName, devNama, namaTester, RateGame dari tabel developer, game 
+ * dan tester beri nama view tersebut 'vRateGame'?
+ *   a. Buat view vRateGame
+ *   b. Query memanggil view tersebut
+ */
 
 DROP VIEW IF EXISTS vRateGame;
 
@@ -225,7 +206,11 @@ JOIN tester ON game.idGame = tester.idTester;
 
 SELECT * FROM vRateGame;
 
-/* Nomor 17 */
+/* 
+ * 17. Buat Store Procedure untuk input data pada tabel Tester dan beri nama SP tersebut 'INPUTTESTER?
+ *   a. Buat SP 'INPUTTESTER'
+ *   b. Panggil SP 'INPUTTESTER inputkan (idGame =7, namaTester 'Hilda', usia = 21, Rate 80)
+ */
 
 /* a */
 DROP PROCEDURE IF EXISTS inputTester;
@@ -247,7 +232,11 @@ DELIMITER ;
 /* b */
 CALL inputTester(7, 'Hilda', 21, 80);
 
-/* Nomor 18 */
+/* 
+ * 18. Buat Store Procedure untuk Edit data pada tabel Tester dan beri nama SP tersebut 'EDITTESTER?
+ *   a. Buat SP 'EDITTESTER dengan 2 parameter (nama tester yang akan diganti dan hasil yg diganti)
+ *   b. Panggil SP 'EDITTESTER ubah nama Hilda yang tadi iinputkan menjadi Hildawati
+ */
 
 /* a */
 DROP PROCEDURE IF EXISTS editTester;
@@ -267,7 +256,11 @@ DELIMITER ;
 /* b */
 CALL editTester('Hilda', 'Hildawati');
 
-/* Nomor 19 */
+/* 
+ * 19. Buat Store Procedure untuk Delete data pada tabel Tester dan beri nama SP tersebut 'DELETETESTER?\
+ *   a. Buat SP 'DELETETESTER (1 parameter nama tester yang ingin dihapus)
+ *   b. Panggil SP 'DELETETESTER untuk menghapus data tester yang bernama Hildawati
+ */
 
 /* a */
 DROP PROCEDURE IF EXISTS deleteTester;
@@ -285,7 +278,12 @@ DELIMITER ;
 /* b */
 CALL deleteTester('Hildawati');
 
-/* Nomor 20 */
+/* 
+ * 20. Buat Triger untuk setiap aktivitas Create,Update dan Delete pada tabel tester dan masukan kedalam logtester dan berinama
+ *   a. Buat Trigger dengan nama TrackTesterInput untuk setiap data tester yang diinput, jenis berinama 'Tambah Data'
+ *   b. Buat Trigger dengan nama TrackTesterEdit untuk setiap data tester yang diedit, jenis berinama 'Edit Data'
+ *   c. Buat Trigger dengan nama TrackTesterDelete untuk setiap data tester yang didelete ,jenis berinama 'Delete Data'
+ */
 
 /* a */
 DROP TRIGGER IF EXISTS trackTesterInput
@@ -328,4 +326,5 @@ END$$
 DELIMITER ;
 
 CALL deleteTester('Daniel D Fortuna');
+
 
